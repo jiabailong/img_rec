@@ -21,7 +21,6 @@ import java.util.Arrays;
 public class TestWord {
     public String textWord(Bitmap src, String targetName) {
         String tarname = targetName;
-        targetName = "/sdcard/test/Target2/tg" + 1 + ".bmp";
         final float data[] = new float[2];
         data[0] = 0;
         data[1] = 1;
@@ -29,7 +28,6 @@ public class TestWord {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 
-        src = BitmapFactory.decodeFile("/sdcard/test/t1.bmp", options);
 //        src.getPixel(0,0);
         final int src_widht = src.getWidth();
         final int src_height = src.getHeight();
@@ -38,15 +36,15 @@ public class TestWord {
         int len = byte_src.length;
         final int CharacterRect[] = new int[4];
         final int numrect[] = new int[4];
-        final StringBuffer stringBuffer = new StringBuffer();
+//        final StringBuffer stringBuffer = new StringBuffer();
         Bitmap target = BitmapFactory.decodeFile(targetName, options);
         int t_widht = target.getWidth();
         int t_height = target.getHeight();
         byte[] byte_target = bitmap2Array2bgr(target);
         int m = NativeFunctions.CharacterMatch(byte_src, src_widht, src_height,
                 byte_target, t_widht, t_height, CharacterRect, numrect);
-        stringBuffer.append("===" + m + "=定位字符串" +
-                Arrays.toString(CharacterRect) + "=\n待识别" + Arrays.toString(numrect));
+//        stringBuffer.append("===" + m + "=定位字符串" +
+//                Arrays.toString(CharacterRect) + "=\n待识别" + Arrays.toString(numrect));
         Bitmap clipBitmap = Bitmap.createBitmap(src, numrect[0], numrect[1],
                 numrect[2], numrect[3]);
         byte[] byte_clip = bitmap2Array2bgr(clipBitmap);
@@ -58,7 +56,7 @@ public class TestWord {
         String s = com.example.numrec.NativeFunctions.NumberVersion();
         com.example.numrec.NativeFunctions.NumberCreate(data);
         int n = com.example.numrec.NativeFunctions.NumberRec(byte_clip, clip_width, cliip_height, icon_rect);
-        stringBuffer.append("\n" + n + "=园型" + Arrays.toString(icon_rect) + "\n");
+//        stringBuffer.append("\n" + n + "=园型" + Arrays.toString(icon_rect) + "\n");
         com.example.numrec.NativeFunctions.NumberRelease();
         String res = int2String(icon_rect, n);
         Log.d(tarname, res.toString());

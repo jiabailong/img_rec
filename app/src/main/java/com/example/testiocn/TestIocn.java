@@ -20,7 +20,6 @@ import java.util.Arrays;
 public class TestIocn {
     public String test(Bitmap src, String targetName) {
         String tarname = targetName;
-        tarname = "/sdcard/test/Target3/tg" + 1 + ".bmp";
         final float data[] = new float[2];
         data[0] = 0;
         data[1] = 1;
@@ -28,7 +27,7 @@ public class TestIocn {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 
-        src = BitmapFactory.decodeFile("/sdcard/test/t3.bmp", options);
+
         final int src_widht = src.getWidth();
         final int src_height = src.getHeight();
 
@@ -38,15 +37,15 @@ public class TestIocn {
 
         int CharacterRect[] = new int[4];
         int numrect[] = new int[4];
-        StringBuffer stringBuffer = new StringBuffer();
+//        StringBuffer stringBuffer = new StringBuffer();
         Bitmap target = BitmapFactory.decodeFile(tarname, options);
         int t_widht = target.getWidth();
         int t_height = target.getHeight();
         byte[] byte_target = bitmap2Array2bgr(target);
         int m = NativeFunctions.CharacterMatch(byte_src, src_widht, src_height,
                 byte_target, t_widht, t_height, CharacterRect, numrect);
-        stringBuffer.append("===" + m + "=定位字符串" +
-                Arrays.toString(CharacterRect) + "=\n待识别" + Arrays.toString(numrect));
+//        stringBuffer.append("===" + m + "=定位字符串" +
+//                Arrays.toString(CharacterRect) + "=\n待识别" + Arrays.toString(numrect));
         Bitmap clipBitmap = Bitmap.createBitmap(src, numrect[0], numrect[1],
                 numrect[2], numrect[3]);
         byte[] byte_clip = bitmap2Array2bgr(clipBitmap);
@@ -55,9 +54,9 @@ public class TestIocn {
         int icon_rect[] = new int[9];
         com.example.icondetection.NativeFunctions.IconCreate(data);
         int n = com.example.icondetection.NativeFunctions.IconDetection(byte_clip, clip_width, cliip_height, icon_rect);
-        stringBuffer.append("\n" + n + "=园型" + Arrays.toString(icon_rect) + "\n");
+       // stringBuffer.append("\n" + n + "=园型" + Arrays.toString(icon_rect) + "\n");
         com.example.icondetection.NativeFunctions.IconRelease();
-        Log.d("===jia", stringBuffer.toString());
+//        Log.d("===jia", stringBuffer.toString());
         target.recycle();
         clipBitmap.recycle();
         String s = res2Word(n);
