@@ -50,58 +50,7 @@ TextView textView;
 
 
 
-//textView.setText(stringBuffer.toString());
 
-
-//        saveMyBitmap("==",clipBitmap);
-    public byte[] bitmap2Array2bgr(Bitmap bitmap){
-      int  width = bitmap.getWidth();
-      int  height = bitmap.getHeight();
-
-        int size = bitmap.getRowBytes() * bitmap.getHeight();
-        ByteBuffer byteBuffer = ByteBuffer.allocate(size);
-        bitmap.copyPixelsToBuffer(byteBuffer);
-        byte[] temp = byteBuffer.array();
-
-//        byte[] pixels = new byte[(temp.length / 4) * 3]; // Allocate for 3 byte BGR
-//
-//        // Copy pixels into place
-//        for (int i = 0; i < (temp.length / 4); i++) {
-//            pixels[i * 3] = temp[i * 4 + 3];     // B
-//            pixels[i * 3 + 1] = temp[i * 4 + 2]; // G
-//            pixels[i * 3 + 2] = temp[i * 4 + 1]; // R
-//
-//            // Alpha is discarded
-//        }
-//
-//        return pixels;
-        return  temp;
-    }
-    public void saveMyBitmap(String bitName,Bitmap mBitmap){
-        File f = new File("/sdcard/" + bitName + ".png");
-        try {
-            f.createNewFile();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-        }
-        FileOutputStream fOut = null;
-        try {
-            fOut = new FileOutputStream(f);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        mBitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
-        try {
-            fOut.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            fOut.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 
 }
